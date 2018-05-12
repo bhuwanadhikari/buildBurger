@@ -1,0 +1,30 @@
+.BuildControls{
+    width: 100%;
+    background-color: #e27b36;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: auto;
+    box-shadow: 0 2px 1px grey;
+    padding: 10px 0;
+}
+
+.OrderButton{
+    padding: 20px;
+    color: white;
+    background-color: #f4d004;
+    border-radius: 5px;
+    margin: 5px auto;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.OrderButton:disabled{
+     padding: 20px;
+     color: white;
+     background-color: grey;
+     border-radius: 5px;
+     margin: 5px auto;
+     border: 1px solid white;
+    cursor: not-allowed;
+ }
