@@ -3,6 +3,7 @@ import Auxi from '../../hoc/Auxi';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 
 
 const PRICES = {
@@ -22,16 +23,8 @@ class BurgerBuilder extends Component{
              meat:0
         },
         totalPrice: 4,
-        canPurchase: false
-    };
-
-    updateCanPurchase = (newIngredients) => {
-        const sum = Object.keys(newIngredients)
-            .map(igKey => newIngredients[igKey])
-            .reduce((sum, el) =>{
-                 return (el+sum);
-            }, 0);
-        this.setState({canPurchase: sum>0})
+        canPurchase: false,
+        purchasing: false
     };
 
     addIngredientHandler = (type) => {
@@ -59,6 +52,19 @@ class BurgerBuilder extends Component{
         this.setState({totalPrice: finalPrice, ingredients: updatedIngredients});
     };
 
+    updateCanPurchase = (newIngredients) => {
+        const sum = Object.keys(newIngredients)
+            .map(igKey => newIngredients[igKey])
+            .reduce((sum, el) =>{
+                return (el+sum);
+            }, 0);
+        this.setState({canPurchase: sum>0})
+    };
+
+    purchaseHandler = () => {
+        this.setState({purchasing: true});
+    };
+
 
     render(){
         let disabledInfo = {
@@ -70,8 +76,9 @@ class BurgerBuilder extends Component{
         return (
             <Auxi>
                 <Burger ingredients = {this.state.ingredients}/>
-                <Modal>
-
+                <Modal
+                    show = {this.state.purchasing}>
+                    <OrderSummary ingredients ={this.state.ingredients} />
                 </Modal>
                 <BuildControls
                     ingredientAdded = {this.addIngredientHandler}
@@ -79,6 +86,7 @@ class BurgerBuilder extends Component{
                     disabledInfo = {disabledInfo}
                     price = {this.state.totalPrice}
                     purchaseState={this.state.canPurchase}
+                    ordered = {this.purchaseHandler}
 
                 />
             </Auxi>
