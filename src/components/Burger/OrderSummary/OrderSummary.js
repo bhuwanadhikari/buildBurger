@@ -1,30 +1,37 @@
-import React from 'react';
-import Auxi from '../../../hoc/Auxi';
+import React, { Component } from 'react';
+import Auxi from '../../../hoc/Auxi/Auxi';
 import Button from '../../UI/Button/Button';
 
-const orderSummary = (props) => {
+class OrderSummary extends Component {
 
-    const ingredients = Object.keys(props.ingredients).map(igKey => {
-        return <li key ={igKey}><span style={{textTransform:'capitalize'}} >{igKey}</span>: <b>{props.ingredients[igKey]}</b> </li>
-    });
+    componentWillUpdate(){
+        console.log("order summary will update");
+    }
 
-    return (
-        <Auxi>
-            <h3>Your Order</h3>
-            <p>Your delicious Burger with following ingredients:</p>
-            <ul>
-                {ingredients}
-            </ul>
-            <p><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
-            <p>Continue to Checkout?</p>
-            <Button btnType = "Success" clicked = {props.purchaseContinued} >
-                CONTINUE
-            </Button>
-            <Button btnType = "Danger" clicked = {props.purchaseCancelled}>
-                CANCEL
-            </Button>
-        </Auxi>
-    )
-};
+    render() {
+        const ingredients = Object.keys(this.props.ingredients).map(igKey => {
+            return <li key={igKey}><span
+                style={{textTransform: 'capitalize'}}>{igKey}</span>: <b>{this.props.ingredients[igKey]}</b></li>
+        });
+        return (
+            <Auxi>
+                <h3>Your Order</h3>
+                <p>Your delicious Burger with following ingredients:</p>
+                <ul>
+                    {ingredients}
+                </ul>
+                <p><strong>Total Price: ${this.props.price.toFixed(2)}</strong></p>
+                <p>Continue to Checkout?</p>
+                <Button btnType="Success" clicked={this.props.purchaseContinued}    >
+                    CONTINUE
+                </Button>
+                <Button btnType="Danger" clicked={this.props.purchaseCancelled}>
+                    CANCEL
+                </Button>
+            </Auxi>
 
-export default orderSummary;
+        );
+    }
+}
+
+export default OrderSummary;

@@ -1,0 +1,28 @@
+.Hamburger{
+    width: 30px;
+    height: 50px;
+    align-items: center;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 7px 0 5px 0;
+    cursor: pointer;
+
+}
+
+.Span{
+    width: 30px;
+    background-color: white;
+    height: 4px;
+    border: 0 solid white;
+    border-radius: 2px;
+    margin: 6px;
+
+}
+
+@media(min-width: 500px){
+    .Hamburger{
+        display: none;
+    }
+}
