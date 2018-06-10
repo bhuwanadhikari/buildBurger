@@ -10,13 +10,18 @@ const withErrorHandler = (WrappedComponent, axios) => {
       };
       componentWillMount(){
           axios.interceptors.request.use(req => {
-              this.setState({error: null});  // to clear the error
+              this.reqInterceptor = this.setState({error: null});  // to clear the error
               return req;
           });
           axios.interceptors.response.use (res => res , error => {
-              this.setState({error: error}); // setting error in case of error
+              this.resInterceptor = this.setState({error: error}); // setting error in case of error
           });
       }
+
+      componentWillUnmount(){
+          axios.interceptors.request.eject(this.reqInterceptor);
+          axios.interceptors.request.eject(this.resInterceptor);
+  }
 
       //on clicking on backdrop displayed error will be thrown away
       errorConfirmedHandler = () => {
